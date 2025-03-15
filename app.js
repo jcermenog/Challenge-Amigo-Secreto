@@ -1,5 +1,6 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación.
 //  Aquí deberás desarrollar la lógica para resolver el problema.
+/* Programador de Challenge: Julio Cermeño*/
 
 /* VARIABLES & ARREGLOS*/
 let arregloAmigos = [];
@@ -24,13 +25,14 @@ function agregarAmigo() {
         arregloAmigos.push(nombreAmigo);
         nombreAmigo = document.getElementById('amigo').value ="";
         console.log(arregloAmigos);
+        /* al momento que agregamos un amigo al arreglo llamamos la funcion que agrega los elementos <li>
+           para que la insersion pueda ser visible al usuario*/
         listaAmigosDisplay();
     }
     return;
 }
 
 /* elemento lista para amigos*/
-
 function listaAmigosDisplay (){
     /* seleccionamos elemento lista*/
     let listaAmigosPantalla = document.querySelector('#listaAmigos');
@@ -45,7 +47,34 @@ function listaAmigosDisplay (){
         /* insertamos el elemento <li> a la lista*/
         listaAmigosPantalla.appendChild(ingresoAmigo);
 
-    }
-    
+    }   
     return;
+}
+
+/* funcion para sortear amigo secreto */
+function sortearAmigo(){
+    /* validamos que el arreglo no este vacio*/
+    if (arregloAmigos.length > 0) {
+        let posicionAuxiliar = 0;
+        posicionAuxiliar = arregloAmigos.length;
+        /* generamos la posicion del arreglo para seleccionar a nuestro amigo secreto*/
+        let amigoSorteadoSecreto = Math.floor(Math.random()*posicionAuxiliar); 
+        console.log(amigoSorteadoSecreto);
+        /* iniciamos a mostrar el resultado de la seleccion de amigo secreto*/
+        let seleccionAmigoSecreto = document.querySelector('#resultado');
+        /* seleccionamos el contenedor de la lista de amigos y lo ocultamos */
+        let listaAmigosPantalla = document.querySelector('#listaAmigos');
+        listaAmigosPantalla.style.display = "none"; 
+         /* limpiar lista*/
+         seleccionAmigoSecreto.innerHTML = "";
+        /* crea el elemento <li>*/
+        let seleccionAmigo = document.createElement("li");
+        /* asigno el valor a el elemto <li>*/
+        seleccionAmigo.textContent = arregloAmigos[amigoSorteadoSecreto];
+        /* insertamos el elemento <li> a la lista*/
+        seleccionAmigoSecreto.appendChild(seleccionAmigo);
+        asignarTextoElemento('h2','tu amigo secreto es: ')
+    } else {
+        asignarTextoElemento('h2','aun no a ingresado amigos para poder sortear')
+    }
 }
